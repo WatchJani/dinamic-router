@@ -1,21 +1,23 @@
-package main
+package trie
 
 import (
 	"strings"
 	"testing"
 )
 
+type Handler func()
+
 func BenchmarkSpeedTest(b *testing.B) {
 	b.StopTimer()
 
-	trie := NewTrie[handler]()
+	trie := NewTrie[Handler]()
 
 	allEndpoints := []struct {
 		key   string
-		value handler
+		value Handler
 	}{
 		{
-			key: "dree/{*}",
+			key: "dree/{more}/macka",
 			value: func() {
 				// fmt.Println("NEAH")
 			},
@@ -30,9 +32,9 @@ func BenchmarkSpeedTest(b *testing.B) {
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		value, err := trie.Search([]string{"dree", "janko"})
+		value, err := trie.Search([]string{"dree", "janko", "macka"})
 		if err != nil {
-			panic(err)
+			return
 		}
 
 		value()
