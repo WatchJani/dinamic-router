@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	t "github.com/WatchJani/dinamic-router.git/trie"
+	t "github.com/WatchJani/dinamic-router/trie"
 )
 
 type handler func()
